@@ -5,7 +5,7 @@ public class CalculateONP {
 
     public static Float calculate(String[] eq){
 
-        Stack<Float> stos = new Stack<Float>();
+        Stack<Float> stos = new Stack<>();
         for (String s : eq) {
 
             if (s.charAt(0) <= 57 && s.charAt(0) >= 48) {
