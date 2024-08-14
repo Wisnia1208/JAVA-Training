@@ -5,16 +5,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
             Scanner skaner = new Scanner(System.in);
-        String tekst;
-            do{
-                tekst = skaner.nextLine();
+            String tekst = skaner.nextLine();
 
-                String[] stos = tekst.split(" ");
+            String[] stos = tekst.split(" +");
 
-                Float x = CalculateONP.calculate(stos);
-                System.out.println(x);
-            }while(tekst != "k");
-
-
+            Float x = CalculateONP.calculate(stos);
+            System.out.println(x);
     }
 }

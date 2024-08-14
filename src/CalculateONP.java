@@ -8,60 +8,39 @@ public class CalculateONP {
         Stack<Float> stos = new Stack<Float>();
         for (String s : eq) {
             if (s.charAt(0) <= 57 && s.charAt(0) >= 48) {
-                stos.push(Float.parseFloat(s));
+                try{
+                    stos.push(Float.parseFloat(s));
+                } catch (NumberFormatException err){
+                    System.out.println("Zły input");
+                    return 0.0f;
+                }
+
             }
             else{
+                Float a,b;
+                try{
+                    a = stos.pop();
+                    b = stos.pop();
+                } catch (EmptyStackException err){
+                System.out.println("Błąd stosu - nieprawidłowa notacja");
+                return 0.0f;
+            }
                 switch (s) {
                     case "+":
-                        try{
-                            Float a = stos.pop();
-                            Float b = stos.pop();
-                            stos.push(a + b);
-                            break;
-                        } catch (EmptyStackException err){
-                            System.out.println("Błąd stosu - za mało liczb do działania");
-                            return 0.0f;
-                        }
+                        stos.push(a + b);
+                        break;
                     case "-":
-                        try{
-                            Float a = stos.pop();
-                            Float b = stos.pop();
-                            stos.push(a - b);
-                            break;
-                        } catch (EmptyStackException err){
-                            System.out.println("Błąd stosu - za mało liczb do działania");
-                            return 0.0f;
-                        }
+                        stos.push(a - b);
+                        break;
                     case "*":
-                        try{
-                            Float a = stos.pop();
-                            Float b = stos.pop();
-                            stos.push(a * b);
-                            break;
-                        } catch (EmptyStackException err){
-                            System.out.println("Błąd stosu - za mało liczb do działania");
-                            return 0.0f;
-                        }
+                        stos.push(a * b);
+                        break;
                     case "/":
-                        try{
-                            Float a = stos.pop();
-                            Float b = stos.pop();
-                            stos.push(a / b);
-                            break;
-                        } catch (EmptyStackException err){
-                            System.out.println("Błąd stosu - za mało liczb do działania");
-                            return 0.0f;
-                        }
+                        stos.push(a / b);
+                        break;
                     case "^":
-                        try{
-                            Float a = stos.pop();
-                            Float b = stos.pop();
-                            stos.push((float) Math.pow(a,b));
-                            break;
-                        } catch (EmptyStackException err){
-                            System.out.println("Błąd stosu - za mało liczb do działania");
-                            return 0.0f;
-                        }
+                        stos.push((float) Math.pow(a,b));
+                        break;
                     default:
                         System.out.println("Nieprawidłowa wartość: " + s);
                         return 0.0f;
