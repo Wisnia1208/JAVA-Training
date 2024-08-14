@@ -7,16 +7,21 @@ public class CalculateONP {
 
         Stack<Float> stos = new Stack<Float>();
         for (String s : eq) {
+
             if (s.charAt(0) <= 57 && s.charAt(0) >= 48) {
                 try{
                     stos.push(Float.parseFloat(s));
                 } catch (NumberFormatException err){
-                    System.out.println("Zły input");
+                    System.out.println("Nieprawidłowe dane wejściowe");
                     return 0.0f;
                 }
 
             }
             else{
+                if(s.length()>1){
+                    System.out.println("Nieprawidłowe dane wejściowe");
+                    return 0.0f;
+                }
                 Float a,b;
                 try{
                     a = stos.pop();
