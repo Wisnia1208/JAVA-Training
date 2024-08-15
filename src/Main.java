@@ -7,9 +7,8 @@ public class Main {
             Scanner skaner = new Scanner(System.in);
             String tekst = skaner.nextLine();
 
-            String[] stos = tekst.split(" +");
-
-            Float x = CalculateONP.calculate(stos);
-            System.out.println(x);
+            CalculateONP.writeONP(tekst);
+            //Float x = CalculateONP.calculate(tekst);
+            //System.out.println(x);
     }
 }

@@ -1,10 +1,13 @@
 import java.util.EmptyStackException;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 public class CalculateONP {
 
-    public static Float calculate(String[] eq){
-
+    public static Float calculate(String input){
+        String[] eq = input.split(" +");
         Stack<Float> stos = new Stack<>();
         for (String s : eq) {
 
@@ -15,7 +18,6 @@ public class CalculateONP {
                     System.out.println("Nieprawidłowe dane wejściowe");
                     return 0.0f;
                 }
-
             }
             else{
                 if(s.length()>1){
@@ -59,5 +61,21 @@ public class CalculateONP {
             return 0.0f;
         }
 
+    }
+
+    public static String writeONP(String input){
+        //zadanie to zrobić tłumacz z normalnego zapisu do ONP
+        Stack<Float> stos = new Stack<>();
+
+        // Wyrażenie regularne do wyłuskania liczb zmiennoprzecinkowych
+        String regex = "\\b\\d+(\\.\\d+)?\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        // Przeszukiwanie stringa pod kątem dopasowań
+        while (matcher.find()) {
+            stos.push(Float.valueOf(matcher.group()));
+        }
+
+        return input;
     }
 }
