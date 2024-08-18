@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 
-public class CalculateONP {
+public abstract class CalculateONP {
 
     public static Float calculate(String input){
         String[] eq = input.split(" +");
@@ -65,17 +65,57 @@ public class CalculateONP {
 
     public static String writeONP(String input){
         //zadanie to zrobić tłumacz z normalnego zapisu do ONP
-        Stack<Float> stos = new Stack<>();
 
-        // Wyrażenie regularne do wyłuskania liczb zmiennoprzecinkowych
-        String regex = "\\b\\d+(\\.\\d+)?\\b";
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile("[^0-9+\\-*/^\\s.]|(?<!\\d)\\.(?!\\d)|\\.(?=\\D)");
         Matcher matcher = pattern.matcher(input);
-        // Przeszukiwanie stringa pod kątem dopasowań
-        while (matcher.find()) {
-            stos.push(Float.valueOf(matcher.group()));
+
+        // Znajdowanie i wypisywanie niedozwolonych znaków
+        if (matcher.find()) {
+            System.out.println("Znaleziony niedozwolony znak: " + matcher.group());
+            return "error";
         }
 
-        return input;
+        input = input.replaceAll("\\s+", "");
+        String output = "";
+
+
+        output = Recursive(input,output);
+
+
+        return output;
     }
+
+    static String Recursive(String s, String output){
+        if(s.isEmpty()){
+            System.out.println("XD");
+        }else{
+            output+="*"+Recursive(s.substring(0,s.length()-1),output);;
+            //output =
+
+        }
+        return output;
+    }
+
+    /*String RecursiveWriteONP(String s){
+        int[] indexes = Functions.FindBrackets(s);
+        int[] notFound = new int[] {-1,-1};
+        if(indexes == notFound){
+            //funkcja
+        }else{
+            RecursiveWriteONP(s.substring(indexes[0]+1,indexes[1]-1));
+        }
+    }
+
+    String write(String s){
+        String output = "";
+        while(s.length()>0){
+            if(s.indexOf("^")!=-1){
+                int indexOfPower = s.indexOf("^");
+                output = Functions.GetFloat(Functions.FindSignL(s,indexOfPower)+1,indexOfPower,s)+" "+Functions.GetFloat(indexOfPower+1, Functions.FindSignR(s,indexOfPower), s)+output+ " ^";
+                s = s.substring(0,Functions.FindSignL(s,indexOfPower)+1));//zjebane po całosći pozdarwiam
+            }
+        }
+    }
+    */
+
 }
